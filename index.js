@@ -139,7 +139,7 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 class Instructor extends Lambdasian {
-  constructor({name:name, age: age, location: location, specialty: specialty, favLanguage: favLanguage, catchPhrase: catchPhrase}) {
+  constructor({name: name, age: age, location: location, specialty: specialty, favLanguage: favLanguage, catchPhrase: catchPhrase}) {
     super({name: name, age: age, location: location});
     this.specialty = specialty;
     this.favLanguage = favLanguage;
@@ -150,7 +150,7 @@ class Instructor extends Lambdasian {
       return `Today we are learning about ${subject}`
     }
     grade(student, subject) {
-      return `${Student.name} receives a perfect score on ${subject}`
+      return `${student.name} receives a perfect score on ${subject}`
     }
 }
 
@@ -204,19 +204,22 @@ class Student extends Lambdasian {
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
 class ProjectManager extends Instructor{
-  constructor({name: name, age: age, location: location, gradClassName: gradClassName, favInstructor: favInstructor}) {
-    super({name: name, age: age, location: location});
+  constructor({name: name, age: age, location: location, gradClassName, favInstructor, specialty, favLanguage, catchPhrase}) {
+    super({name: name, age: age, location: location, specialty: specialty, favLanguage: favLanguage, catchPhrase: catchPhrase});
     this.gradClassName = gradClassName;
     this.favInstructor = favInstructor;
+    this.specialty = specialty;
+    this.favLanguage = favLanguage;
+    this.catchPhrase = catchPhrase;
   }
   standUp(channel) {
     this.channel = channel;
     return `${this.name} announces to ${this.channel}, @channel standy times!`
   }
   debugsCode(student, subject) {
-    return `${this.name} debugs ${Student.name}'s code on ${this.subject}`
+    this.subject = subject;
+    return `${this.name} debugs ${student.name}'s code on ${this.subject}`
   }
-
 }
 
 /*
